@@ -27,6 +27,7 @@ module.exports = {
     alias: {
       'single-spa': path.resolve(__dirname, 'node_modules/single-spa/lib/single-spa.js'),
       'src': path.resolve(__dirname, 'src'),
+      'globalStore': path.resolve(__dirname, 'src', 'common', 'globalStore'),
     },
   },
   module: {
