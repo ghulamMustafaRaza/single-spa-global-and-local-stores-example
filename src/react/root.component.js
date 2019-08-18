@@ -1,48 +1,18 @@
 import React from 'react';
-import { render } from 'react-dom';
-import { Router, browserHistory } from 'react-router';
-import { showFrameworkObservable, getBorder } from 'src/common/colored-border.js';
-
+import { Provider } from 'react-redux'
+import App from './components/App'
 import './stubs/COURSES';
 
-const rootRoute = {
-  childRoutes: [{
-    path: '/',
-    component: require('./components/App'),
-    childRoutes: [
-      require('./routes/Calendar'),
-      require('./routes/Course'),
-      require('./routes/Grades'),
-      require('./routes/Messages'),
-      require('./routes/Profile')
-    ]
-  }]
-};
+import { store } from './store'
+
+
 
 export default class Root extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      frameworkInspector: false,
-    };
-  }
-  componentWillMount() {
-    this.subscription = showFrameworkObservable.subscribe(newValue => this.setState({ frameworkInspector: newValue }));
-  }
   render() {
     return (
-      <div style={this.state.frameworkInspector ? { border: getBorder('react') } : {}}>
-        {this.state.frameworkInspector &&
-          <div>(built with React)</div>
-        }
-        <Router
-          history={browserHistory}
-          routes={rootRoute}
-        />
-      </div>
+      <Provider store={store}>
+        <App />
+      </Provider>
     );
-  }
-  componentWillUnmount() {
-    this.subscription.dispose();
   }
 }

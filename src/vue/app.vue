@@ -1,7 +1,7 @@
 <template>
   <div id="vue-app">
     <div v-bind:style="{border: border}">
-      <h2>Local store</h2>
+      <h5>Local store</h5>
       count: {{count}}
       <button @click="increment">increment</button>
       <button @click="decrement">decrement</button>
@@ -21,8 +21,6 @@ export default {
   methods: mapMutations(["increment", "decrement"]),
   data() {
     return {
-      showFramework: false,
-      border: "",
       searchQuery: "",
       gridColumns: ["name", "power"],
       gridData: [
