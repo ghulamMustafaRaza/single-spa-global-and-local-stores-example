@@ -1,17 +1,10 @@
 <template>
   <div id="vue-app">
     <div v-bind:style="{border: border}">
-      <div v-if="showFramework">(built with Vue.js)</div>
-      <form id="search">
-        <div class="row">
-          <div class="input-field col s12">
-            <div class="input-field">
-              <input name="query" v-model="searchQuery" />
-              <label class="active" for="query">Search</label>
-            </div>
-          </div>
-        </div>
-      </form>
+      <h2>Local store</h2>
+      count: {{count}}
+      <button @click="increment">increment</button>
+      <button @click="decrement">decrement</button>
       <demo-grid :data="gridData" :columns="gridColumns" :filter-key="searchQuery"></demo-grid>
     </div>
   </div>
@@ -19,11 +12,13 @@
 
 <script>
 import DemoGrid from "./components/demo-grid";
-
+import { mapState, mapMutations } from "vuex";
 export default {
   components: {
     "demo-grid": DemoGrid
   },
+  computed: mapState(["count"]),
+  methods: mapMutations(["increment", "decrement"]),
   data() {
     return {
       showFramework: false,

@@ -1,16 +1,14 @@
-import Vue from 'vue/dist/vue.min.js';
+import Vue from 'vue';
 import singleSpaVue from 'single-spa-vue';
 import app from './app.vue';
-import { showFrameworkObservable, getBorder } from 'src/common/colored-border.js';
+import store from './store';
 
 const vueLifecycles = singleSpaVue({
   Vue,
   appOptions: {
     el: '#vue-app',
-    template: `<app />`,
-    components: {
-      "app": app
-    },
+    render: (h) => h(app),
+    store
   }
 });
 
