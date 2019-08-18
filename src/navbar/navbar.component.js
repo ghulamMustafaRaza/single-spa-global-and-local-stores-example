@@ -1,7 +1,5 @@
 import React from 'react';
-import Dialog from './dialog.component.js';
-import FrameworkInspector from './framework-inspector.component.js';
-import {getBorder, showFrameworkObservable} from 'src/common/colored-border.js';
+import { showFrameworkObservable } from 'src/common/colored-border.js';
 
 export default class Navbar extends React.Component {
   constructor() {
@@ -11,14 +9,14 @@ export default class Navbar extends React.Component {
     };
   }
   componentDidMount() {
-    this.subscription = showFrameworkObservable.subscribe(newValue => this.setState({frameworkInspector: newValue}));
+    this.subscription = showFrameworkObservable.subscribe(newValue => this.setState({ frameworkInspector: newValue }));
     $(".button-collapse").sideNav();
   }
   render() {
     return (
       <div>
         {this.state.frameworkInspector &&
-          <div style={{position: 'fixed', top: 0, left: 0, zIndex: 10000}}>
+          <div style={{ position: 'fixed', top: 0, left: 0, zIndex: 10000 }}>
             (built with React)
           </div>
         }
@@ -56,60 +54,14 @@ export default class Navbar extends React.Component {
 function menuItems() {
   return (
     <div>
-      <FrameworkInspector />
       <li>
         <a onClick={() => this.navigateTo("/")}>
-          Home
-        </a>
-      </li>
-      <li>
-        <a onClick={() => this.navigateTo("/react")}>
           React
-        </a>
-      </li>
-      <li>
-        <a onClick={() => this.navigateTo("/angularjs")}>
-          AngularJS
-        </a>
-      </li>
-      <li>
-        <a onClick={() => this.navigateTo("/angular")}>
-          Angular
         </a>
       </li>
       <li>
         <a onClick={() => this.navigateTo("/vue")}>
           Vue.js
-        </a>
-      </li>
-      <li>
-        <a onClick={() => this.navigateTo("/svelte")}>
-          Svelte
-        </a>
-      </li>
-      <li>
-        <a onClick={() => this.navigateTo("/cyclejs")}>
-          CycleJS
-        </a>
-      </li>
-      <li>
-        <a onClick={() => this.navigateTo("/preact")}>
-          Preact
-        </a>
-      </li>
-      <li>
-        <a onClick={() => this.navigateTo("/vanilla")}>
-          Vanilla
-        </a>
-      </li>
-      <li>
-        <a onClick={() => this.navigateTo("/inferno")}>
-          Inferno
-        </a>
-      </li>
-      <li>
-        <a onClick={() => this.navigateTo("/ember")}>
-          Ember
         </a>
       </li>
     </div>

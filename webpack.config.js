@@ -1,16 +1,9 @@
 const webpack = require('webpack');
 const path = require('path');
-const lodash = require('lodash');
-
-const infernoBabelConfig = getBabelConfig();
-infernoBabelConfig.plugins.push('inferno');
-
-const preactBabelConfig = getBabelConfig();
-preactBabelConfig.presets.splice(0, 1);
-preactBabelConfig.plugins.push(['transform-react-jsx', {pragma: 'h'}])
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
-  entry: __dirname + '/src/single-spa-examples.js',
+  entry: __dirname + '/src/main.js',
   output: {
     path: process.cwd() + '/build',
     filename: '[name].js',
@@ -26,29 +19,25 @@ module.exports = {
     },
   },
   resolve: {
+    extensions: ['*', '.js', '.vue', '.json', '.css'],
     modules: [
       "node_modules",
       path.resolve(__dirname, "./"),
     ],
     alias: {
       'single-spa': path.resolve(__dirname, 'node_modules/single-spa/lib/single-spa.js'),
+      'src': path.resolve(__dirname, 'src'),
     },
   },
   module: {
     rules: [
       {
+        test: /\.vue$/,
+        loader: 'vue-loader'
+      },
+      {
         test: /\.css$/,
         use: ['style-loader', 'css-loader']
-      },
-      {
-        test: /inferno.+\.js$/,
-        loader: 'babel-loader',
-        query: infernoBabelConfig,
-      },
-      {
-        test: /preact.+\.js$/,
-        loader: 'babel-loader',
-        query: preactBabelConfig,
       },
       {
         test: /\.html$/,
@@ -65,11 +54,7 @@ module.exports = {
         test: /\.ts$/,
         exclude: /node_modules/,
         loader: 'ts-loader',
-      },
-      {
-        test: /svelte.+\.html$/,
-        loader: 'svelte-loader',
-      },
+      }
     ],
   },
   plugins: [
@@ -78,6 +63,7 @@ module.exports = {
       minChunks: module => module.context && module.context.indexOf('node_modules') !== -1
     }),
     new webpack.ContextReplacementPlugin(/\@angular(\\|\/)core(\\|\/)esm5/, path.join(__dirname, './src')),
+    new VueLoaderPlugin()
   ],
 };
 

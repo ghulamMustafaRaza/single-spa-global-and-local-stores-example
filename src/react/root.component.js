@@ -6,8 +6,8 @@ import { showFrameworkObservable, getBorder } from 'src/common/colored-border.js
 import './stubs/COURSES';
 
 const rootRoute = {
-  childRoutes: [ {
-    path: 'react',
+  childRoutes: [{
+    path: '/',
     component: require('./components/App'),
     childRoutes: [
       require('./routes/Calendar'),
@@ -16,7 +16,7 @@ const rootRoute = {
       require('./routes/Messages'),
       require('./routes/Profile')
     ]
-  } ]
+  }]
 };
 
 export default class Root extends React.Component {
@@ -27,11 +27,11 @@ export default class Root extends React.Component {
     };
   }
   componentWillMount() {
-    this.subscription = showFrameworkObservable.subscribe(newValue => this.setState({frameworkInspector: newValue}));
+    this.subscription = showFrameworkObservable.subscribe(newValue => this.setState({ frameworkInspector: newValue }));
   }
   render() {
     return (
-      <div style={this.state.frameworkInspector ? {border: getBorder('react')} : {}}>
+      <div style={this.state.frameworkInspector ? { border: getBorder('react') } : {}}>
         {this.state.frameworkInspector &&
           <div>(built with React)</div>
         }

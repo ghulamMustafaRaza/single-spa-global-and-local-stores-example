@@ -1,7 +1,7 @@
 import React from 'react';
 import Technology from './technology.component.js';
 import Walkthroughs from './walkthroughs.component.js';
-import {getBorder, showFrameworkObservable} from 'src/common/colored-border.js';
+import { getBorder, showFrameworkObservable } from 'src/common/colored-border.js';
 
 export default class HomeRoot extends React.Component {
   constructor() {
@@ -11,11 +11,11 @@ export default class HomeRoot extends React.Component {
     };
   }
   componentWillMount() {
-    this.subscription = showFrameworkObservable.subscribe(newValue => this.setState({frameworkInspector: newValue}));
+    this.subscription = showFrameworkObservable.subscribe(newValue => this.setState({ frameworkInspector: newValue }));
   }
   render() {
     return (
-      <div style={this.state.frameworkInspector ? {border: getBorder('react')} : {}}>
+      <div style={this.state.frameworkInspector ? { border: getBorder('react') } : {}}>
         {this.state.frameworkInspector &&
           <div>(built with React)</div>
         }
